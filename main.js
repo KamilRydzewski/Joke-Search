@@ -20,11 +20,11 @@ function findJokes() {
   if (searchInput.value.length >= 1) {
     fetch(endpoint, {
       headers: {
-        Accept: "application/json"
-      }
+        Accept: "application/json",
+      },
     })
-      .then(blob => blob.json())
-      .then(data => displayJokes(data.results));
+      .then((blob) => blob.json())
+      .then((data) => displayJokes(data.results));
   } else {
     resetBook();
   }
@@ -37,7 +37,7 @@ function displayJokes(jokesList) {
   } else {
     list.innerHTML = jokesList
       .map((object, i) => {
-        const checkFavObject = favouriteList.find(item => item.id === object.id);
+        const checkFavObject = favouriteList.find((item) => item.id === object.id);
         return `<li class="joke" id="${object.id}" data-index="${i}">
 					${object.joke}
 					<input  type="checkbox" id="${i}" ${checkFavObject ? "checked" : ""}/>
@@ -51,10 +51,13 @@ function displayJokes(jokesList) {
 }
 
 function resetBook() {
+  if (favouriteBtn.classList.contains("active")) {
+    favouriteBtn.classList.remove("active");
+  }
   list.classList.remove("active");
   form.reset();
   list.innerHTML = ``;
-  quantityBtn.forEach(button => {
+  quantityBtn.forEach((button) => {
     if (button.classList.contains("active")) {
       button.classList.remove("active");
     }
@@ -63,7 +66,7 @@ function resetBook() {
 
 function checkLimit(event) {
   let limitNumber = 30;
-  quantityBtn.forEach(button => {
+  quantityBtn.forEach((button) => {
     if (button.classList.contains("active")) {
       limitNumber = button.dataset.value;
     }
@@ -72,7 +75,7 @@ function checkLimit(event) {
 }
 
 function setLimit() {
-  quantityBtn.forEach(button => {
+  quantityBtn.forEach((button) => {
     if (button.classList.contains("active")) {
       button.classList.remove("active");
     }
@@ -88,9 +91,9 @@ function setLimit() {
 function toggleFavourite(e) {
   if (!e.target.matches("input")) return;
   const targetElement = document.querySelector(`li[data-index="${e.target.id}"]`);
-  if (favouriteList.find(object => object.id === targetElement.id)) {
+  if (favouriteList.find((object) => object.id === targetElement.id)) {
     //////////// remove object
-    const object = favouriteList.find(object => object.id === targetElement.id);
+    const object = favouriteList.find((object) => object.id === targetElement.id);
     const index = favouriteList.indexOf(object);
     favouriteList.splice(index, 1);
   } else {
@@ -98,7 +101,7 @@ function toggleFavourite(e) {
     const favouriteJoke = {
       joke: targetElement.textContent,
       id: targetElement.id,
-      done: true
+      done: true,
     };
     favouriteList.push(favouriteJoke);
   }
@@ -144,7 +147,7 @@ searchButton.addEventListener("click", findJokes);
 searchInput.addEventListener("submit", () => favouriteBtn.classList.remove("active"));
 searchInput.addEventListener("keyup", () => favouriteBtn.classList.remove("active"));
 resetBtn.addEventListener("click", resetBook);
-quantityBtn.forEach(button => button.addEventListener("click", setLimit));
+quantityBtn.forEach((button) => button.addEventListener("click", setLimit));
 list.addEventListener("click", toggleFavourite);
 list.addEventListener("click", toggleStar);
 favouriteBtn.addEventListener("click", displayFavourite);
