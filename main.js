@@ -14,6 +14,10 @@ function handleForm(e) {
 form.addEventListener("submit", handleForm);
 
 function findJokes() {
+  if (favouriteBtn.classList.contains("active")) {
+    favouriteBtn.classList.remove("active");
+  }
+
   const limitNumber = checkLimit();
   const endpoint = `https://icanhazdadjoke.com/search?limit=${limitNumber}&term=${searchInput.value}`;
 
@@ -138,11 +142,6 @@ function toggleStar(e) {
 }
 
 searchInput.addEventListener("submit", findJokes);
-
-// -----LIVE FILTERING----- Is working but I need to change the display way for example
-// as a suggestion not results because there is a conflict with search button and submit form - make them useless.
-// searchInput.addEventListener("keyup", findJokes);
-
 searchButton.addEventListener("click", findJokes);
 searchInput.addEventListener("submit", () => favouriteBtn.classList.remove("active"));
 searchInput.addEventListener("keyup", () => favouriteBtn.classList.remove("active"));
