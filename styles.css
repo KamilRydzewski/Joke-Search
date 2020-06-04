@@ -18,6 +18,7 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  background: transparent;
 }
 
 header {
@@ -63,18 +64,20 @@ header {
 
 .search-form {
   margin: 24px auto;
-  padding: 0 40px;
 }
 
 .search-panel-container {
   position: relative;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 150px;
+  width: 100%;
+  padding-right: 63px;
 }
 
 .search-buttons-container {
   position: relative;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .search {
@@ -142,7 +145,7 @@ header {
 }
 
 .favourite-btn.active {
-  padding-left: 15px;
+  background-color: red;
 }
 
 .favourite-btn.active > i::before {
@@ -153,9 +156,17 @@ header {
   font-size: 15px;
 }
 
+@media all and (max-width: 900px) {
+  .favourite-btn.active > span {
+    display: none;
+  }
+}
+
 .control-buttons {
   display: flex;
   justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .qty-btn-container {
@@ -237,7 +248,6 @@ header {
 
 .no-results {
   color: #808080;
-  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
